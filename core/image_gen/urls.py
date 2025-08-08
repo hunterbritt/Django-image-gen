@@ -14,7 +14,7 @@ router = DefaultRouter()
 router.register(r"generate", views.GenerateImage, basename="generate_image")
 
 urlpatterns = [
-    # path('test/', views.test, name='test_hd_generations')
+    path('test/', views.test, name='test_hd_generations')
 ]
 
 

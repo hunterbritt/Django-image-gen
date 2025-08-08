@@ -12,21 +12,21 @@ class ImageGenerationJob(models.Model):
         ('failed', 'Failed'),
     ]
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="generated_images")
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="generated_images")
     prompt = models.TextField()  # Original prompt word
     enhanced_prompt = models.TextField(blank=True)  # Enhanced prompt
     parameters = models.JSONField(default=dict)  # Generation parameters (temperature, resolution, etc.)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='queued')
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
-    image_url = models.URLField(blank=True)  # Image
-    bria_response = models.JSONField(blank=True)  # Raw API Response
+    image_url = models.URLField(blank=True, null=True)  # Image
+    # bria_response = models.JSONField(blank=True,)  # Raw API Response
 
-    class Meta:
-        indexes = [
-            models.Index(fields=['status']),  # Status query optimization
-            models.Index(fields=['user', '-created_at']),  # Quick access to the latest records
-        ]
+    # class Meta:
+    #     indexes = [
+    #         models.Index(fields=['status']),  # Status query optimization
+    #         models.Index(fields=['user', '-created_at']),  # Quick access to the latest records
+    #     ]
 
 
 class PromptTemplate(models.Model):
